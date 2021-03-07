@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Battleship", "Battleship\Battleship.csproj", "{F55E2C80-B48E-401E-B3BA-7B685D219027}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Battleship.Api", "Battleship.Api\Battleship.Api.csproj", "{F55E2C80-B48E-401E-B3BA-7B685D219027}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Battleship.Domain", "Battleship.Domain\Battleship.Domain.csproj", "{AE76CDEE-8CCF-47BE-AAB6-1647EE72BF84}"
 EndProject
