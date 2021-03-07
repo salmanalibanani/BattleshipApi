@@ -63,6 +63,8 @@ In addition to above, I have implemented some safegaurds inline with the rules o
 
 - Multiple boards are allowed in my implementation. Each time you POST to /api/Board, you get a new board id. The idea here is that in a two players game, you can maintain two boards, and each player can use their board's GUID to maintain the state of play.
 
+- If you send an incorrect board id, a 404 is returned.
+
 - I have used memory cache as a quick way to maintain the state of the board across API calls. A full persistence layer wasn't the requirement of the assignment, and memory cache is probably not the best way to maintain state. A database would suit this application better.
 
 - I have used MediatR to decouple HTTP layer from business logic layer. Probably a bit of an overkill for a small application like this, but I love the decoupling that MediatR provides.
