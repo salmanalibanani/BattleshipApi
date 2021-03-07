@@ -8,10 +8,12 @@ Simply clone the repository and hit F5 in Visual Studio (I use Professional 2019
 
 - First you need to create a board with POST request (/api/Board). This end point expects board dimentions, e.g.
 
+```
 {
 "width": 10,
 "height": 10
 }
+```
 
 You will receive a board id in response which you will use in subsequent calls.
 
