@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Battleship.Domain.Data
@@ -55,6 +56,23 @@ namespace Battleship.Domain.Data
                 {
                     yield return new ShipCell() { x = _startX, y = i++ + _startY };
                 }
+            }
+        }
+
+        // This is only for debugging, so that the ship cells show up nicely in API responses.  
+        // There is no need for this in current requirements.
+        public ShipCell[] AllShipCells
+        {
+            get
+            {
+                IList<ShipCell> cells = new List<ShipCell>();
+
+                foreach (var shipCell in GetAllShipCells())
+                {
+                    cells.Add(shipCell);
+                }
+
+                return cells.ToArray();
             }
         }
     }
