@@ -26,8 +26,8 @@ namespace Battleship.Domain.Data
             _orientation = orientation;
         }
 
-       public bool IsHit(int x, int y)
-       {
+        public bool IsHit(int x, int y)
+        {
             for (var i = 0; i < _length; i++)
             {
                 if ((_orientation == Orientation.Vertical && x == _startX && y == i + _startY)
@@ -37,7 +37,7 @@ namespace Battleship.Domain.Data
             }
 
             return false;
-       }
+        }
 
         public IEnumerable<ShipCell> GetAllShipCells()
         {
@@ -59,36 +59,11 @@ namespace Battleship.Domain.Data
             }
         }
 
-        // Below are only for debugging, so that the ship cells show up nicely in API responses, and I can validate the design etc. 
+        // Below is only for debugging, so that the ship cells show up nicely in API responses.
         // There is no need for them in current requirements.
         public ShipCell[] AllShipCells => GetAllShipCells().ToArray();
 
-        public bool WasAttacked(Board board)
-        {
-            foreach (var shipCell in GetAllShipCells())
-            {
-                if (board.Cells[shipCell.x, shipCell.y].Attacked)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public bool WasDestroyedCompletely(Board board)
-        {
-            foreach (var shipCell in GetAllShipCells())
-            {
-                if (!board.Cells[shipCell.x, shipCell.y].Attacked)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-    }
+     }
 
     public class ShipCell
     {
