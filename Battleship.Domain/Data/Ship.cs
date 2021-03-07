@@ -59,21 +59,34 @@ namespace Battleship.Domain.Data
             }
         }
 
-        // This is only for debugging, so that the ship cells show up nicely in API responses.  
-        // There is no need for this in current requirements.
-        public ShipCell[] AllShipCells
+        // Below are only for debugging, so that the ship cells show up nicely in API responses, and I can validate the design etc. 
+        // There is no need for them in current requirements.
+        public ShipCell[] AllShipCells => GetAllShipCells().ToArray();
+
+        public bool WasAttacked(Board board)
         {
-            get
+            foreach (var shipCell in GetAllShipCells())
             {
-                IList<ShipCell> cells = new List<ShipCell>();
-
-                foreach (var shipCell in GetAllShipCells())
+                if (board.Cells[shipCell.x, shipCell.y].Attacked)
                 {
-                    cells.Add(shipCell);
+                    return true;
                 }
-
-                return cells.ToArray();
             }
+
+            return false;
+        }
+
+        public bool WasDestroyedCompletely(Board board)
+        {
+            foreach (var shipCell in GetAllShipCells())
+            {
+                if (!board.Cells[shipCell.x, shipCell.y].Attacked)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 

@@ -3,9 +3,6 @@ using Battleship.Domain.Handlers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Battleship.Controllers
@@ -26,8 +23,7 @@ namespace Battleship.Controllers
         [HttpPost]
         public async Task<ActionResult<Board>> Post(AddShipRequest request)
         {
-            Board board;
-            var success = _memoryCache.TryGetValue(request.BoardId, out board);
+            var success = _memoryCache.TryGetValue(request.BoardId, out Board board);
 
             if (!success)
                 return new NotFoundResult();

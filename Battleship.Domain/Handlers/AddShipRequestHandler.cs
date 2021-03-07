@@ -1,8 +1,7 @@
 ﻿using Battleship.Domain.Data;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,14 +15,18 @@ namespace Battleship.Domain.Handlers
         public Orientation Orientation { get; set; }
 
         public Guid BoardId { get; set; }
+
+        [JsonIgnore]
         public Board Board { get; set; }
     }
     public class AddShipRequestHandler : IRequestHandler<AddShipRequest, bool>
     {
-        public async Task<bool> Handle(AddShipRequest request, CancellationToken cancellationToken)
+        public Task<bool> Handle(AddShipRequest request, CancellationToken cancellationToken)
         {
+            
             var newShip = new Ship(request.X, request.Y, request.Length, request.Orientation);
-            return request.Board.AddShip(newShip);
+            return Task.FromResult(request.Board.AddShip(newShip));
         }
     }
+
 }

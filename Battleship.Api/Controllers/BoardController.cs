@@ -1,12 +1,9 @@
 ﻿using Battleship.Domain.Data;
 using Battleship.Domain.Handlers;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Battleship.Controllers
@@ -33,11 +30,11 @@ namespace Battleship.Controllers
             return Ok(result);
         }
 
+        // For debugging purposes
         [HttpGet]
-        public async Task<ActionResult<Board>> Get(Guid boardId)
+        public ActionResult<Board> Get(Guid boardId)
         {
-            Board board;
-            var success = _memoryCache.TryGetValue(boardId, out board);
+            var success = _memoryCache.TryGetValue(boardId, out Board board);
 
             if (success)
                 return Ok(board);
@@ -48,16 +45,14 @@ namespace Battleship.Controllers
         [HttpPost("attack")]
         public async Task<ActionResult<Board>> Attack(AttackRequest request)
         {
-            Board board;
-            var success = _memoryCache.TryGetValue(request.BoardId, out board);
+            var success = _memoryCache.TryGetValue(request.BoardId, out Board board);
 
             if (!success)
                 return new NotFoundResult();
 
             request.Board = board;
 
-            var result = await _sender.Send(request);
-            return Ok(result);
+            return Ok(await _sender.Send(request));
         }
     }
 }
