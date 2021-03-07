@@ -29,6 +29,10 @@ namespace Battleship
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(name: "v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Battleship API", Version = "v1" });
+            });
             services.AddMemoryCache();
             services.AddMediatR(typeof(BoardCreationRequestHandler));
         }
@@ -40,6 +44,12 @@ namespace Battleship
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "Battleship API");
+            });
 
             app.UseHttpsRedirection();
 
